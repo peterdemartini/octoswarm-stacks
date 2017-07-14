@@ -1,0 +1,115 @@
+{
+  "octoswarm": {
+    "version": "12",
+    "dockerVersion": "1.12.6"
+  },
+  "stackEnvName": "nodesummit",
+  "stackName": "deployment",
+  "elbs": [
+    {
+      "name": "nodesummit-deployment"
+    }
+  ],
+  "managers": {
+    "count": 1,
+    "instanceType": "t2.micro"
+  },
+  "workers": {
+    "count": 1,
+    "instanceType": "t2.micro"
+  },
+  "services": [
+    {
+      "name": "traefik",
+      "count": 1,
+      "docker": {
+        "image": "containous/traefik:v1.2.0",
+        "sock": true,
+        "role": "manager",
+        "networks": ["traefik-net"],
+        "publish": ["80:80", "8080:8080"],
+        "runOptions": ["--docker", "--docker.swarmmode", "--docker.domain=octoblu.com", "--docker.watch", "--web"],
+        "logentries": false
+      }
+    },
+    {
+      "name": "beekeeper-updater-swarm",
+      "count": 1,
+      "docker": {
+        "sock": true,
+        "role": "manager",
+        "logentries": false,
+        "healthcheck": {
+          "disable": true
+        }
+      },
+      "beekeeper": {
+        "update": true
+      }
+    },
+    {
+      "name": "beekeeper-worker",
+      "count": 3,
+      "docker": {
+        "role": "worker",
+        "logentries": false
+      },
+      "beekeeper": {
+        "update": true
+      }
+    },
+    {
+      "name": "beekeeper-mongo",
+      "count": 1,
+      "docker": {
+        "repo": "mongo",
+        "role": "worker",
+        "logentries": false
+      },
+      "beekeeper": {
+        "update": false
+      }
+    },
+    {
+      "name": "beekeeper-redis",
+      "count": 1,
+      "docker": {
+        "repo": "redis",
+        "role": "worker",
+        "logentries": false
+      },
+      "beekeeper": {
+        "update": false
+      }
+    },
+    {
+      "name": "beekeeper-service",
+      "count": 3,
+      "dns": [
+        {
+          "host": "beekeeper.nodesummit.octoblu.com",
+          "elb": "nodesummit-deployment"
+        }
+      ],
+      "traefik": {
+        "host": "beekeeper.nodesummit.octoblu.com",
+        "network": "traefik-net"
+      },
+      "docker": {
+        "networks": ["traefik-net"],
+        "role": "worker",
+        "logentries": false
+      },
+      "beekeeper": {
+        "update": true
+      },
+      "pingdom": [
+        {
+          "check": true,
+          "hosts": ["beekeeper.nodesummit.octoblu.com"],
+          "id": "0fd99209-9749-48cc-8e95-203993bde281"
+        }
+      ]
+    }
+  ]
+}

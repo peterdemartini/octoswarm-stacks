@@ -1,0 +1,49 @@
+networks:
+  traefik-net: null
+services:
+  beekeeper-updater-docker-compose:
+    deploy:
+      placement:
+        constraints:
+        - node.labels.manager == true
+      replicas: 1
+    env_file: ./env.d/beekeeper-updater-docker-compose.env
+    image: octoblu/beekeeper-updater-docker-compose:v2.0.3
+  beekeeper-updater-docker-stack:
+    deploy:
+      placement:
+        constraints:
+        - node.labels.manager == true
+      replicas: 1
+    env_file: ./env.d/beekeeper-updater-docker-stack.env
+    image: octoblu/beekeeper-updater-docker-stack:v2.0.2
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+  server-status-code:
+    deploy:
+      labels:
+      - traefik.docker.network=demo-docker-compose_traefik-net
+      - traefik.frontend.rule=HostRegexp:status-code-docker-compose.nodesummit.octoblu.com
+      - traefik.port=80
+      placement:
+        constraints:
+        - node.labels.worker == true
+      replicas: 3
+    env_file: ./env.d/server-status-code.env
+    image: octoblu/server-status-code:v2.0.2
+  traefik:
+    command: traefik --docker --docker.swarmmode --docker.watch --web
+    deploy:
+      placement:
+        constraints:
+        - node.labels.manager == true
+      replicas: 2
+    image: containous/traefik:v1.2.0
+    networks:
+    - traefik-net
+    ports:
+    - 80:80
+    - 8080:8080
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+version: '3'

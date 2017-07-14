@@ -1,0 +1,21 @@
+{
+  "octoswarm": {
+    "version": "13",
+    "dockerVersion": "17.05.0-ce"
+  },
+  "stackEnvName": "nodesummit",
+  "stackName": "demo-docker-compose",
+  "elbs": [
+    {
+      "name": "demo-docker-compose"
+    }
+  ],
+  "managers": {
+    "count": 1,
+    "instanceType": "t2.micro"
+  },
+  "workers": {
+    "count": 1,
+    "instanceType": "t2.micro"
+  }
+}

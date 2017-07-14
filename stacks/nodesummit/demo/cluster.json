@@ -1,0 +1,79 @@
+{
+  "octoswarm": {
+    "version": "12",
+    "dockerVersion": "1.12.6"
+  },
+  "stackEnvName": "nodesummit",
+  "stackName": "demo",
+  "elbs": [
+    {
+      "name": "nodesummit-demo"
+    }
+  ],
+  "managers": {
+    "count": 1,
+    "instanceType": "t2.micro"
+  },
+  "workers": {
+    "count": 1,
+    "instanceType": "t2.micro"
+  },
+  "services": [
+    {
+      "name": "beekeeper-updater-swarm",
+      "count": 1,
+      "docker": {
+        "role": "manager",
+        "sock": true,
+        "logentries": false,
+        "healthcheck": {
+          "disable": true
+        }
+      },
+      "beekeeper": {
+        "update": true
+      }
+    },
+    {
+      "name": "traefik",
+      "count": 1,
+      "docker": {
+        "networks": ["traefik-net"],
+        "image": "containous/traefik:v1.2.0",
+        "role": "manager",
+        "sock": true,
+        "publish": ["80:80", "8080:8080"],
+        "runOptions": ["--docker", "--docker.swarmmode", "--docker.domain=octoblu.com", "--docker.watch", "--web"],
+        "logentries": false
+      }
+    },
+    {
+      "name": "server-status-code",
+      "count": 3,
+      "dns": [
+        {
+          "host": "status-code.nodesummit.octoblu.com",
+          "elb": "nodesummit-demo"
+        }
+      ],
+      "traefik": {
+        "hostregexp": "status-code-demo.nodesummit.octoblu.com",
+        "network": "traefik-net"
+      },
+      "docker": {
+        "role": "worker",
+        "networks": ["traefik-net"]
+      },
+      "beekeeper": {
+        "update": true
+      },
+      "pingdom": [
+        {
+          "check": true,
+          "hosts": ["status-code.nodesummit.octoblu.com"],
+          "id": "27986534-2a05-4303-9a86-09fcebea6a24"
+        }
+      ]
+    }
+  ]
+}
