@@ -9,16 +9,6 @@ services:
       replicas: 1
     env_file: ./env.d/beekeeper-updater-docker-compose.env
     image: octoblu/beekeeper-updater-docker-compose:v2.0.3
-  beekeeper-updater-docker-stack:
-    deploy:
-      placement:
-        constraints:
-        - node.labels.manager == true
-      replicas: 1
-    env_file: ./env.d/beekeeper-updater-docker-stack.env
-    image: octoblu/beekeeper-updater-docker-stack:v2.0.2
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
   server-status-code:
     deploy:
       labels:

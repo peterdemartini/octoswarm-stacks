@@ -14,6 +14,7 @@ A public Octoswarm demo for nodesummit.
 ## Documentation
 
 See [Octoswarm](https://github.com/octoblu/octoswarm)
+See [Beekeeper](https://github.com/octoblu/beekeeper-service)
 
 ## License
 
