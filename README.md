@@ -4,64 +4,16 @@
 
 * [Introduction](#introduction)
 * [Getting Started](#getting-started)
-  * [Install Docker](#install-docker)
-  * [Install Homebrew](#install-homebrew)
-  * [Install Whalebrew](#install-whalebrew)
-  * [Install Octoswarm](#install-octoswarm)
-* [Usage](#usage)
-  * [Environment](#environment)
+* [Documentation](#documentation)
 * [License](#license)
 
 ## Introduction
 
-A public Octoswarm demo for nodesummit. All examples and usage are for `macOS`
+A public Octoswarm demo for nodesummit.
 
-## Getting Started
+## Documentation
 
-### Install Docker
-
-*See: [https://docs.docker.com/docker-for-mac/install/#download-docker-for-mac](https://docs.docker.com/docker-for-mac/install/#download-docker-for-mac)*
-
-
-### Install Homebrew
-
-*See: [https://brew.sh/](https://brew.sh/)*
-
-```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-### Install Whalebrew
-
-*See: [https://github.com/bfirsh/whalebrew](https://github.com/bfirsh/whalebrew)*
-
-```bash
-curl -L "https://github.com/bfirsh/whalebrew/releases/download/0.1.0/whalebrew-$(uname -s)-$(uname -m)" -o /usr/local/bin/whalebrew; chmod +x /usr/local/bin/whalebrew
-```
-
-## Install Octoswarm
-
-```
-brew tap octoblu/tools
-brew install octoswarm
-```
-
-## Usage
-
-### Environment
-
-- AWS_ACCESS_KEY_ID          (required)
-- AWS_SECRET_ACCESS_KEY      (required)
-- AWS_DEFAULT_REGION         (required)
-- DOCKER_HUB_USERNAME        (required)
-- DOCKER_HUB_PASSWORD        (required)
-- BEEKEEPER_URI              (required)
-- PINGDOM_APP_KEY            (required)
-- PINGDOM_USERNAME           (required)
-- PINGDOM_PASSWORD           (required)
-- OCTOSWARM_GITHUB_API_TOKEN (required)
-- OCTOSWARM_LOGENTRIES_TOKEN (optional)
-- OCTOSWARM_MACHINE          (optional)
+See [Octoswarm](https://github.com/octoblu/octoswarm)
 
 ## License
 
