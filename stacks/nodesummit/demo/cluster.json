@@ -91,7 +91,7 @@
       }
     },
     {
-      "name": "nodesummit-beekeeper-manager",
+      "name": "nodesummit-api-ai-service",
       "count": 2,
       "dns": [
         {
