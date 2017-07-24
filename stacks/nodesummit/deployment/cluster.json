@@ -76,7 +76,7 @@
     },
     {
       "name": "beekeeper-service",
-      "count": 3,
+      "count": 2,
       "dns": [
         {
           "host": "beekeeper.nodesummit.octoblu.com",
@@ -105,7 +105,7 @@
     },
     {
       "name": "beekeeper-worker",
-      "count": 3,
+      "count": 2,
       "docker": {
         "networks": ["traefik-net", "beekeeper-redis", "beekeeper-mongo"],
         "role": "worker",

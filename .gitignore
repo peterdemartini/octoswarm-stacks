@@ -58,3 +58,4 @@ typings/
 .env
 
 stacks/**/docker-machine
+stacks/nodesummit/demo/env.d/nodesummit-api-ai-service.env

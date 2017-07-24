@@ -50,7 +50,7 @@
     },
     {
       "name": "server-status-code",
-      "count": 3,
+      "count": 2,
       "dns": [
         {
           "host": "status-code.nodesummit.octoblu.com",
@@ -67,14 +67,28 @@
       },
       "beekeeper": {
         "update": true
-      },
-      "pingdom": [
+      }
+    },
+    {
+      "name": "nodesummit-api-ai-service",
+      "count": 2,
+      "dns": [
         {
-          "check": true,
-          "hosts": ["status-code.nodesummit.octoblu.com"],
-          "id": "27986534-2a05-4303-9a86-09fcebea6a24"
+          "host": "ai.nodesummit.octoblu.com",
+          "elb": "nodesummit-demo"
         }
-      ]
+      ],
+      "traefik": {
+        "hostregexp": "ai.nodesummit.octoblu.com",
+        "network": "traefik-net"
+      },
+      "docker": {
+        "role": "worker",
+        "networks": ["traefik-net"]
+      },
+      "beekeeper": {
+        "update": true
+      }
     }
   ]
 }
