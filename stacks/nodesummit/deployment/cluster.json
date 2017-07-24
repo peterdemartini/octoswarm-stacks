@@ -49,21 +49,11 @@
       }
     },
     {
-      "name": "beekeeper-worker",
-      "count": 3,
-      "docker": {
-        "role": "worker",
-        "logentries": false
-      },
-      "beekeeper": {
-        "update": true
-      }
-    },
-    {
       "name": "beekeeper-mongo",
       "count": 1,
       "docker": {
-        "repo": "mongo",
+        "networks": ["beekeeper-mongo"],
+        "image": "mongo",
         "role": "worker",
         "logentries": false
       },
@@ -75,7 +65,8 @@
       "name": "beekeeper-redis",
       "count": 1,
       "docker": {
-        "repo": "redis",
+        "networks": ["beekeeper-redis"],
+        "image": "redis",
         "role": "worker",
         "logentries": false
       },
@@ -97,7 +88,7 @@
         "network": "traefik-net"
       },
       "docker": {
-        "networks": ["traefik-net"],
+        "networks": ["traefik-net", "beekeeper-redis", "beekeeper-mongo"],
         "role": "worker",
         "logentries": false
       },
@@ -111,6 +102,18 @@
           "id": "0fd99209-9749-48cc-8e95-203993bde281"
         }
       ]
+    },
+    {
+      "name": "beekeeper-worker",
+      "count": 3,
+      "docker": {
+        "networks": ["traefik-net", "beekeeper-redis", "beekeeper-mongo"],
+        "role": "worker",
+        "logentries": false
+      },
+      "beekeeper": {
+        "update": true
+      }
     }
   ]
 }
