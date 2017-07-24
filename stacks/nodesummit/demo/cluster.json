@@ -71,7 +71,7 @@
     },
     {
       "name": "nodesummit-beekeeper-manager",
-      "count": 2,
+      "count": 1,
       "dns": [
         {
           "host": "beekeeper-manager.nodesummit.octoblu.com",
@@ -92,7 +92,7 @@
     },
     {
       "name": "nodesummit-api-ai-service",
-      "count": 2,
+      "count": 1,
       "dns": [
         {
           "host": "ai.nodesummit.octoblu.com",

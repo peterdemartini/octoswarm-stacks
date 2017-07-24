@@ -37,16 +37,23 @@ mark_deployment_as_succesful() {
     "$repo"
 }
 
+deploy_it() {
+  local owner="$1"
+  local repo="$2"
+  local tag="$3"
+  create_deployment "$owner" "$repo" "$tag"
+  mark_deployment_as_succesful "$owner" "$repo" "$tag"
+}
+
 main() {
   ensure_beekeeper_util
-  create_deployment "octoblu" "beekeeper-service" "v4.0.0"
-  mark_deployment_as_succesful "octoblu" "beekeeper-service" "v4.0.0"
-  create_deployment "octoblu" "beekeeper-worker" "v2.0.1"
-  mark_deployment_as_succesful "octoblu" "beekeeper-worker" "v2.0.1"
-  create_deployment "octoblu" "beekeeper-updater-swarm" "v2.2.3"
-  mark_deployment_as_succesful "octoblu" "beekeeper-updater-swarm" "v2.2.3"
-  create_deployment "octoblu" "server-status-code" "v2.0.2"
-  mark_deployment_as_succesful "octoblu" "server-status-code" "v2.0.2"
+  deploy_it "octoblu" "beekeeper-service" "v4.0.0"
+  deploy_it "octoblu" "beekeeper-worker" "v2.0.1"
+  deploy_it "octoblu" "beekeeper-updater-swarm" "v2.2.3"
+  deploy_it "octoblu" "server-status-code" "v2.0.2"
+  deploy_it "octoblu" "nodesummit-beekeeper-manager" "v1.0.3"
+  deploy_it "octoblu" "nodesummit-api-ai-service" "v3.0.2"
+  deploy_it "octoblu" "meshblu-core-dispatcher" "v20.0.5"
 }
 
 main "$@"
