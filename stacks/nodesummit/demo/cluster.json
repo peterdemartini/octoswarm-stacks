@@ -70,7 +70,28 @@
       }
     },
     {
-      "name": "nodesummit-api-ai-service",
+      "name": "nodesummit-beekeeper-manager",
+      "count": 2,
+      "dns": [
+        {
+          "host": "beekeeper-manager.nodesummit.octoblu.com",
+          "elb": "nodesummit-demo"
+        }
+      ],
+      "traefik": {
+        "hostregexp": "beekeeper-manager.nodesummit.octoblu.com",
+        "network": "traefik-net"
+      },
+      "docker": {
+        "role": "worker",
+        "networks": ["traefik-net"]
+      },
+      "beekeeper": {
+        "update": true
+      }
+    },
+    {
+      "name": "nodesummit-beekeeper-manager",
       "count": 2,
       "dns": [
         {
