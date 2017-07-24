@@ -4,10 +4,11 @@
     "dockerVersion": "17.05.0-ce"
   },
   "stackEnvName": "nodesummit",
-  "stackName": "demo-docker-compose",
+  "stackName": "demo-experimental",
   "elbs": [
     {
-      "name": "demo-docker-compose"
+      "name": "nodesummit-demo-experimental",
+      "cert": "arn:aws:acm:us-west-2:822069890720:certificate/e11b6445-290f-4e53-9ad2-1bb24eb49e07"
     }
   ],
   "managers": {
