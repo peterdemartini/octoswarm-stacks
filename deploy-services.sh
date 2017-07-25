@@ -52,7 +52,7 @@ main() {
   deploy_it "octoblu" "beekeeper-updater-swarm" "v2.2.3"
   deploy_it "octoblu" "server-status-code" "v2.0.2"
   deploy_it "octoblu" "nodesummit-beekeeper-manager" "v1.0.3"
-  deploy_it "octoblu" "nodesummit-api-ai-service" "v3.0.2"
+  deploy_it "octoblu" "nodesummit-api-ai-service" "v3.0.3"
   deploy_it "octoblu" "meshblu-core-dispatcher" "v20.0.5"
 }
 
